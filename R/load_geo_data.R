@@ -20,6 +20,8 @@ load_geo_data <- function(studiesinfo,
   controlname <- "Control"
   targetname <- "Cancer"
 
+  out_mergeset <- list()
+
   for (st in names(studiesinfo)) {
     stopifnot(
       is.character(studiesinfo[[st]]$targetcolname),
@@ -55,6 +57,18 @@ load_geo_data <- function(studiesinfo,
       val = eset,
       pos = 1L
     )
+
+    vec <- colnames(
+      Biobase::pData(eset)
+    )[which(colnames(
+      Biobase::pData(eset)
+    ) %in% c("title", "geo_accession", targetcol))]
+    p_new <- Biobase::pData(eset)[, vec]
+
+    eset_append <- eset
+    Biobase::pData(eset_append) = p_new
+    out_mergeset <- c(out_mergeset, eset_append)
+    rm(eset_append)
   }
 
   # extract and assign sample metadata
@@ -68,4 +82,14 @@ load_geo_data <- function(studiesinfo,
     val = sample_metadata,
     pos = 1L
   )
+
+  # merge sets
+  mergedset <- merge(out_mergeset)
+
+  global_env_hack(
+    key = "mergedset",
+    val = mergedset,
+    pos = 1L
+  )
+  invisible(gc)
 }

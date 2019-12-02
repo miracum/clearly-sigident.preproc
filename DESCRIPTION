@@ -28,7 +28,6 @@ biocViews:
 Imports: 
     data.table,
     utils,
-    BiocManager,
     Biobase,
     GEOquery,
     gcrma

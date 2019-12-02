@@ -1,0 +1,139 @@
+# have a look at https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+
+stages:
+  - dependencies
+  - build
+  - test
+  - deploy
+  - vignette
+
+variables:
+  _R_CHECK_CRAN_INCOMING_: "false"
+  _R_CHECK_FORCE_SUGGESTS_: "true"
+  DOCKER_REGISTRY: "docker.miracum.org"
+  IMAGE_PATH: "r_package_ci"
+  CI_IMAGE_NAME: "${DOCKER_REGISTRY}/${IMAGE_PATH}/${CI_PROJECT_NAME}_base_image"
+  CI_IMAGE_TAG: "0.0.2"
+  R_PKG_NAME: "sigident.preproc"
+
+# set DOCKER_AUTH_CONFIG in settings CI/CD
+# {
+#     "auths": {
+#         "docker.registry.org": {
+#             "auth": "mytoken_from_base64"
+#         }
+#     }
+# }
+#
+# https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry
+# DOCKER_AUTH_TOKEN: echo -n "${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}" | base64
+
+.docker_registry:
+  before_script:
+    - echo ${REGISTRY_PASSWORD} | docker login -u ${REGISTRY_USERNAME} ${DOCKER_REGISTRY} --password-stdin
+  after_script:
+    - docker logout ${DOCKER_REGISTRY}
+
+default:
+  image: ${CI_IMAGE_NAME}:${CI_IMAGE_TAG}
+
+# https://gitlab.com/gitlab-org/gitlab/issues/22801
+build_base_image:
+  stage: dependencies
+  image: docker:stable
+  extends: .docker_registry
+  script:
+    - cd .. && docker build --build-arg PKG_NAME=${R_PKG_NAME} -t ${CI_IMAGE_NAME}:${CI_IMAGE_TAG} -f ${CI_PROJECT_NAME}/ci/Dockerfile .
+    - docker push ${CI_IMAGE_NAME}
+  only:
+    # build only when there are changes in dependencies
+    changes:
+      - "data-raw/devstuffs.R"
+      - "ci/Dockerfile"
+
+check_package:
+  stage: build
+  script:
+    - R -e "devtools::check(pkg = '.', args = c('--no-tests'), build_args = c('--no-build-vignettes'), check_dir = '${CI_PROJECT_DIR}/ci')"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/ci/*.Rcheck"
+    when: on_failure # upload check artifacts when job fails!
+    expire_in: 1 week
+
+create_manual:
+  stage: build
+  allow_failure: true
+  script:
+    - R -e "devtools::build_manual(pkg = '.', path = '${CI_PROJECT_DIR}/ci')"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/ci/*.pdf"
+    expire_in: 1 week
+
+build_source:
+  stage: build
+  script:
+    - R -e "devtools::build(pkg = '.', path = '${CI_PROJECT_DIR}/ci', binary = FALSE, vignettes = FALSE)"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/ci/*.tar.gz"
+    expire_in: 1 week
+
+build_binary:
+  stage: build
+  script:
+    - R -e "devtools::build(pkg = '.', path = '${CI_PROJECT_DIR}/ci', binary = TRUE, vignettes = FALSE)"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/ci/*.tar.gz"
+    expire_in: 1 week
+
+testing:
+  stage: test
+  allow_failure: true
+  when: on_success
+  script:
+    - R -e "install.packages('DT')"
+    - R -e "covr::gitlab(quiet = FALSE)"
+  artifacts:
+    paths:
+      - public
+
+testing:
+  stage: test
+  allow_failure: true
+  when: on_success
+  script:
+    - R -e "devtools::test(pkg = '.')"
+
+#check_errors:
+#  stage: check
+#  script:
+#    - R -e "if (!identical(devtools::check(pkg = '.', document = FALSE, args = c('--no-tests', '--no-vignettes'))[['errors']], character(0))) stop('Check with Errors')"
+
+#check_warnings:
+#  stage: check
+#  script:
+#    - R -e "if (!identical(devtools::check(pkg = '.', document = FALSE, args = c('--no-tests', '--no-vignettes')))[['warnings']], character(0))) stop('Check with Warnings')"
+
+#check_notes:
+#  stage: check
+#  script:
+#    - R -e "if (!identical(devtools::check(pkg = '.', document = FALSE, args = c('--no-tests', '--no-vignettes')))[['notes']], character(0))) stop('Check with Notes')"
+
+install:
+  stage: deploy
+  script:
+    - R -e "devtools::install(pkg = '.', upgrade = 'always')"
+
+compile_vignette:
+  stage: vignette
+  script:
+    - R -e "devtools::build_vignettes(pkg = '.', clean = FALSE)"
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/doc"
+    when: always
+    expire_in: 1 week
+    expire_in: 1 month

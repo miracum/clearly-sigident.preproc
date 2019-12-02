@@ -65,8 +65,14 @@ studiesinfo <- list(
 
 # Load GEO datasets
 
-```{r}
+```{r results='hide', message=FALSE, warning=FALSE, error=FALSE}
 load_geo_data(studiesinfo = studiesinfo,
               datadir = datadir) 
+```
+
+# List files in .Globalenv
+
+```{r}
+ls()
 ```
 

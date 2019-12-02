@@ -63,7 +63,6 @@ usethis::use_package("utils", type="Imports")
 
 # Bioconductor
 # https://github.com/r-lib/devtools/issues/700
-usethis::use_package("BiocManager", type="Imports")
 usethis::use_package("Biobase", type="Import")
 usethis::use_package("GEOquery", type="Imports")
 usethis::use_package("gcrma", type="Imports")
@@ -88,6 +87,7 @@ usethis::use_git_ignore("/*")
 usethis::use_git_ignore("/*/")
 usethis::use_git_ignore("*.log")
 usethis::use_git_ignore("!/.gitignore")
+usethis::use_git_ignore("!/.gitlab-ci.yml")
 usethis::use_git_ignore("!/data-raw/")
 usethis::use_git_ignore("!/DESCRIPTION")
 usethis::use_git_ignore("!/inst/")
