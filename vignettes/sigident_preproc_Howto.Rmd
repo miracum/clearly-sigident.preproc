@@ -1,0 +1,72 @@
+---
+title: "sigident.preproc - Preprocessing GEO datasets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sigident_preproc_Howto}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sigident.preproc)
+```
+
+# Setup
+
+Initially, set some variables that are used later on.
+
+```{r}
+# first of all, we set some static variables
+
+# initialize filePath:
+filePath <- tempdir()
+maindir <- "./geodata/"
+datadir <- paste0(maindir, "data/")
+dir.create(maindir)
+dir.create(datadir)
+```
+
+# Define list that contains a representation of the studies metadata
+
+If specifying `'use_rawdata' = TRUE`, raw the data is downloaded in CEL file format, uncompressed and subsequently normalized with a GCRMA normalization.
+
+```{r}
+studiesinfo <- list(
+  "GSE18842" = list(
+    setid = 1,
+    targetcolname = "source_name_ch1",
+    targetlevelname = "Human Lung Tumor",
+    controllevelname = "Human Lung Control"
+    ),
+  
+  "GSE19804" = list(
+    setid = 1,
+    targetcolname = "source_name_ch1",
+    targetlevelname = "frozen tissue of primary tumor",
+    controllevelname = "frozen tissue of adjacent normal"
+  ),
+  
+  "GSE19188" = list(
+    setid = 1,
+    targetcolname = "characteristics_ch1",
+    controllevelname = "tissue type: healthy",
+    targetlevelname = "tissue type: tumor",
+    use_rawdata = TRUE
+  )
+)
+```
+
+# Load GEO datasets
+
+```{r}
+load_geo_data(studiesinfo = studiesinfo,
+              datadir = datadir) 
+```
+
