@@ -60,6 +60,9 @@ usethis::use_gpl3_license(name = "Universitätsklinikum Erlangen")
 # Imports (CRAN packages)
 usethis::use_package("data.table", type="Imports")
 usethis::use_package("utils", type="Imports")
+usethis::use_package("stats", type="Imports")
+usethis::use_package("methods", type="Imports")
+usethis::use_package("plyr", type="Imports")
 
 # Bioconductor
 # https://github.com/r-lib/devtools/issues/700
@@ -67,7 +70,6 @@ usethis::use_package("Biobase", type="Import")
 usethis::use_package("GEOquery", type="Imports")
 usethis::use_package("gcrma", type="Imports")
 usethis::use_package("sva", type="Imports")
-usethis::use_package("stats", type="Imports")
 usethis::use_package("gPCA", type="Imports")
 #usethis::use_package("hgu133plus2cdf", type="Imports")
 #usethis::use_package("hgu133plus2probe", type="Imports")
@@ -88,6 +90,7 @@ usethis::use_build_ignore("vignettes/geodata")
 usethis::use_build_ignore("vignettes/plots")
 usethis::use_build_ignore("geodata")
 usethis::use_build_ignore("plots")
+usethis::use_build_ignore("ci")
 
 # gitignore
 usethis::use_git_ignore("/*")

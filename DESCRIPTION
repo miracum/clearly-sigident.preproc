@@ -28,11 +28,13 @@ biocViews:
 Imports: 
     data.table,
     utils,
+    stats,
+    methods,
+    plyr,
     Biobase,
     GEOquery,
     gcrma,
     sva,
-    stats,
     gPCA
 Suggests: 
     testthat,
