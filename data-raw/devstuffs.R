@@ -84,6 +84,10 @@ usethis::use_package("lintr", type = "Suggests")
 # buildignore
 usethis::use_build_ignore(".gitlab-ci.yml")
 usethis::use_build_ignore("data-raw")
+usethis::use_build_ignore("vignettes/geodata")
+usethis::use_build_ignore("vignettes/plots")
+usethis::use_build_ignore("geodata")
+usethis::use_build_ignore("plots")
 
 # gitignore
 usethis::use_git_ignore("/*")

@@ -4,7 +4,6 @@ geo_create_diagnosisdesignbatch <- function(sample_metadata,
                                             targetcol) {
   stopifnot(
     is.data.frame(sample_metadata),
-    is.data.frame(study_metadata),
     is.character(controlname),
     is.character(targetname),
     is.character(targetcol)

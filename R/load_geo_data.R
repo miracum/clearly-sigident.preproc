@@ -5,17 +5,41 @@
 #' @param studiesinfo A list that contains specifications
 #'   on the studie's / studies' meta data.
 #' @param datadir A character string. Path to the data-folder.
+#' @param plotdir A character string. Path to the folder to store resulting
+#'   plots. Default: "./plots/".
+#' @param idtype A character string. The type of ID used to name the
+#'   genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
+#'   affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
+#'   are being removed!
+#'
+#' @details The functions writes objects to the global environment, including
+#'   the expression sets of the studies specified in `studiesinfo` - the
+#'   here used study names (list keys) are used for the naming in the global
+#'   environment. Furthermore, `mergedset`, a large expression set containing
+#'   all studies, is also written to the global environment. Please note,
+#'   that this set contains the raw expression data with batch effects.
+#'   Bbatch effects are detected, removed and provided with the object
+#'   `mergeset`. `sample_metadata` is a data.frame, which holds information
+#'   on the samples which are included in the studies, including if they are
+#'   a "Target" or a "Control". `diagnosis` (a binary coding of the target
+#'   variable), `design` () and `batch` () are also provided to the global
+#'   environment to be used with other functions of the `sigident` R package.
+#'
+#' @seealso sigident
+#'
+#' @references \url{https://gitlab.miracum.org/clearly/sigident}
 #'
 #' @export
 
 load_geo_data <- function(studiesinfo,
                           datadir,
-                          plotdir,
+                          plotdir = "./plots/",
                           idtype) {
 
   stopifnot(
     is.list(studiesinfo),
-    is.character(datadir)
+    is.character(datadir),
+    idtype %in% c("affy", "entrez")
   )
 
   targetcol <- "target"

@@ -2,7 +2,7 @@
 title: "sigident.preproc - Preprocessing GEO datasets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{sigident_preproc_Howto}
+  %\VignetteIndexEntry{sigident_preproc_Howto_GEO}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,8 @@ The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/
 
 # Setup
 
-Initially, the R package needs to be loaded and the variable `datadir` and `plotdir` need to be defined. `datadir` points to the folder, where the GEO datasets are downloaded and stored. `plotdir` points to the folder, where resulting plots are stored.
+Initially, the R package needs to be loaded and the variable `datadir` and `plotdir` need to be defined. `datadir` points to the folder, where the GEO datasets are downloaded and stored. `plotdir` points to the folder, where the resulting plots created during the preprocessing are stored. `idtype` can be either "affy" or "entrez", indicating, if either Affy-IDs or Entrez-IDs are to be used as feature names for the subsequent analyses. Selecting "entrez" usually results in a reduction of total features due to the removing of empty strings and duplicate IDs. We here use `idtype = "affy"` for all subsequent analyses.  
+
 
 ```{r setup}
 library(sigident.preproc)
@@ -75,9 +76,17 @@ studiesinfo <- list(
 )
 ```
 
-# Load GEO datasets
+# Load GEO datasets 
 
-All downloaded datasets will be assigned to the global environment. 
+The function `load_geo_data` downloads the GEO datasets specified in the list `studiesinfo`. Further preprocessing steps are performed, such as the discovering, visualizing and removing of batch effectsa and the merging of the data. 
+
+Batch effects are systematic non-biological variation between studies due to experimental and technical artifacts. As first visualization a boxplot is created with the included samples on the x-axis and the expression values on the y-axis. Thereby, considerable discrepancies between the three studies used in this example can already be recognized.    
+
+A more powerfull and also here included approach for batch effect detection is conducting a guided Principle Component Analysis (gPCA) implemented in the [gPCA](https://CRAN.R-project.org/package=gPCA) package.
+
+In order to correct for occurring batch effects and other unwanted variation in high-throughput experiments, the `ComBat` function from the [sva](10.1093/bioinformatics/bts034) package is also applied. The `ComBat` function adjusts for known batches using an empirical Bayesian framework [1]. 
+
+`mergeset` results as output of the above described merging approach and represents a matrix containing batch corrected expression data with genes in the rows and samples in the columns, not an ExpressionSet anymore. 
 
 ```{r results='hide', message=FALSE, warning=FALSE, error=FALSE}
 load_geo_data(studiesinfo = studiesinfo,
@@ -88,7 +97,12 @@ load_geo_data(studiesinfo = studiesinfo,
 
 # List files in .Globalenv
 
+All downloaded datasets and resulting objects will be assigned to the global environment and are suitable to be used in the subsequent analyses implemented in the R package `sigident`: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident).
+
 ```{r}
 ls()
 ```
 
+# References 
+
+[1] W.E. Johnson, C. Li, and A. Rabinovic. Adjusting batch effects in microarray data using empirical bayes methods. Biostatistics, 8(1):118–127, 2007.
