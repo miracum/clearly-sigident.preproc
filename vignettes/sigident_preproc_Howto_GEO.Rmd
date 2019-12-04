@@ -3,8 +3,10 @@ title: "sigident.preproc - Preprocessing GEO datasets"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{sigident_preproc_Howto_GEO}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -99,6 +101,27 @@ load_geo_data(studiesinfo = studiesinfo,
               datadir = datadir,
               plotdir = plotdir,
               idtype = idtype) 
+```
+
+## Visualize batch effect
+
+These plots are created when executing the function `sigident.preproc::load_geo_data` and stored in the directory specified in `plotdir`.
+
+### Before batch correction
+
+```{r out.width='80%'}
+knitr::include_graphics(paste0(plotdir, "GSE18842_batch_effect_boxplot.jpg"))
+knitr::include_graphics(paste0(plotdir, "GSE19804_batch_effect_boxplot.jpg"))
+knitr::include_graphics(paste0(plotdir, "GSE19188_batch_effect_boxplot.jpg"))
+knitr::include_graphics(paste0(plotdir, "Merged_before_batch_effect_boxplot.jpg"))
+knitr::include_graphics(paste0(plotdir, "PCplot_before.png"))
+```
+
+### After batch correction
+
+```{r out.width='80%'}
+knitr::include_graphics(paste0(plotdir, "Merged_after_batch_effect_boxplot.jpg"))
+knitr::include_graphics(paste0(plotdir, "PCplot_after.png"))
 ```
 
 # List files in .Globalenv
