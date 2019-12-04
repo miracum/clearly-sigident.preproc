@@ -19,11 +19,13 @@
 #'   all studies, is also written to the global environment. Please note,
 #'   that this set contains the raw expression data with batch effects.
 #'   Bbatch effects are detected, removed and provided with the object
-#'   `mergeset`. `sample_metadata` is a data.frame, which holds information
-#'   on the samples which are included in the studies, including if they are
-#'   a "Target" or a "Control". `diagnosis` (a binary coding of the target
-#'   variable), `design` () and `batch` () are also provided to the global
-#'   environment to be used with other functions of the `sigident` R package.
+#'   `mergeset`, a matrix containing batch corrected expression data with
+#'   genes in the rows and samples in the columns. `sample_metadata` is a
+#'   data.frame, which holds information on the samples which are included
+#'   in the studies, including if they are a "Target" or a "Control".
+#'   `diagnosis` (a binary coding of the target variable), `design` () and
+#'   `batch` () are also provided to the global environment to be used with
+#'   other functions of the `sigident` R package.
 #'
 #' @seealso sigident
 #'
@@ -156,10 +158,7 @@ load_geo_data <- function(studiesinfo,
 
   # generate list dd with diagnosis and design
   dd <- geo_create_diagnosisdesignbatch(
-    sample_metadata = sample_metadata,
-    controlname = controlname,
-    targetname = targetname,
-    targetcol = targetcol
+    sample_metadata = sample_metadata
   )
 
   diagnosis <- dd$diagnosis

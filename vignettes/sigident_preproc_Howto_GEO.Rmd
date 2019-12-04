@@ -17,6 +17,12 @@ knitr::opts_chunk$set(
 In order to use the R package `sigident` and its functions with GEO datasets, these datasets have first to be downloaded and preprocessed. The preprocessing includes the creation of a merged gene expression data set, extraction of sample metadata and batch correction. 
 The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/sigident).
 
+# GEO platforms
+
+Please note, that the GEO functionality of this R package has only been tested with the platforms, listed below: 
+
+- GPL570 	[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array
+
 # Setup
 
 Initially, the R package needs to be loaded and the variable `datadir` and `plotdir` need to be defined. `datadir` points to the folder, where the GEO datasets are downloaded and stored. `plotdir` points to the folder, where the resulting plots created during the preprocessing are stored. `idtype` can be either "affy" or "entrez", indicating, if either Affy-IDs or Entrez-IDs are to be used as feature names for the subsequent analyses. Selecting "entrez" usually results in a reduction of total features due to the removing of empty strings and duplicate IDs. We here use `idtype = "affy"` for all subsequent analyses.  

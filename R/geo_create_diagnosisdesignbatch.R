@@ -1,13 +1,22 @@
-geo_create_diagnosisdesignbatch <- function(sample_metadata,
-                                            controlname,
-                                            targetname,
-                                            targetcol) {
+#' @title geo_create_diagnosisdesignbatch
+#'
+#' @description Helper function to create diagnosis, design and batch
+#'
+#' @param sample_metadata A data frame. The data frame holding the
+#'   sample metadata.
+#'
+#' @export
+
+geo_create_diagnosisdesignbatch <- function(sample_metadata) {
+
+
   stopifnot(
-    is.data.frame(sample_metadata),
-    is.character(controlname),
-    is.character(targetname),
-    is.character(targetcol)
+    is.data.frame(sample_metadata)
   )
+
+  targetcol <- "target"
+  controlname <- "Control"
+  targetname <- "Target"
 
   discoverydata <- sample_metadata[[targetcol]]
 
