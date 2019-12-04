@@ -29,6 +29,8 @@
 #'
 #' @seealso sigident
 #'
+#' @import data.table
+#'
 #' @references \url{https://gitlab.miracum.org/clearly/sigident}
 #'
 #' @export
