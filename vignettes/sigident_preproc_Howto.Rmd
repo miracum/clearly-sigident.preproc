@@ -14,28 +14,40 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(sigident.preproc)
-```
+In order to use the R package `sigident` and its functions with GEO datasets, these datasets have first to be downloaded and preprocessed. The preprocessing includes the creation of a merged gene expression data set, extraction of sample metadata and batch correction. 
+The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/sigident).
 
 # Setup
 
-Initially, set some variables that are used later on.
+Initially, the R package needs to be loaded and the variable `datadir` and `plotdir` need to be defined. `datadir` points to the folder, where the GEO datasets are downloaded and stored. `plotdir` points to the folder, where resulting plots are stored.
 
-```{r}
-# first of all, we set some static variables
+```{r setup}
+library(sigident.preproc)
 
 # initialize filePath:
 filePath <- tempdir()
+
+# define datadir
 maindir <- "./geodata/"
 datadir <- paste0(maindir, "data/")
 dir.create(maindir)
 dir.create(datadir)
+
+# define plotdir
+plotdir <- "./plots/"
+dir.create(plotdir)
+
+# define idtype
+idtype = "affy"
 ```
 
 # Define list that contains a representation of the studies metadata
 
-If specifying `'use_rawdata' = TRUE`, raw the data is downloaded in CEL file format, uncompressed and subsequently normalized with a GCRMA normalization.
+Definition of a list that contains a representation of the studie's / studies' metadata
+
+This example uses the GEO lung cancer studies "GSE18842", "GSE19804" and "GSE19188", which contain in total 367 samples (197 tumor; 170 non-tumor) and 54,675 transcripts obtained by using Affymetrix GeneChip Human Genome U133 Plus 2.0 Array (platform GPL570).  
+
+The mapping information include the `setid` (which GEO set should be used, normally '1'), the `targetcolname` (the name of the column holding the variable of interest), the `targetlevelname` (the value of the positive outcomes in `targetcolname`) and the `controllevelname`  (the value of the negative outcomes in `targetcolname`) need to be represented in the `studiesinfo` list object. If specifying `'use_rawdata' = TRUE`, raw the data is downloaded in CEL file format, uncompressed and subsequently normalized with a GCRMA normalization. The directory specified in `datadir` will be used for storing downloaded files. 
 
 ```{r}
 studiesinfo <- list(
@@ -65,9 +77,13 @@ studiesinfo <- list(
 
 # Load GEO datasets
 
+All downloaded datasets will be assigned to the global environment. 
+
 ```{r results='hide', message=FALSE, warning=FALSE, error=FALSE}
 load_geo_data(studiesinfo = studiesinfo,
-              datadir = datadir) 
+              datadir = datadir,
+              plotdir = plotdir,
+              idtype = idtype) 
 ```
 
 # List files in .Globalenv

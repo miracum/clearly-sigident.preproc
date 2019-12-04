@@ -4,7 +4,7 @@
 \alias{load_geo_data}
 \title{Load datasets from the GEO database}
 \usage{
-load_geo_data(studiesinfo, datadir)
+load_geo_data(studiesinfo, datadir, plotdir, idtype)
 }
 \arguments{
 \item{studiesinfo}{A list that contains specifications

@@ -1,4 +1,4 @@
-merge <- function(esetlist) {
+geo_merge <- function(esetlist) {
   # set1 = first eset in list, will be overwritten by combined esets
   set1 <- esetlist[[1]]
 

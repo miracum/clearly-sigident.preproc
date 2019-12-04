@@ -1,4 +1,4 @@
-extract_sample_metadata <- function(studiesinfo, targetcol) {
+geo_extract_sample_metadata <- function(studiesinfo, targetcol) {
 
   sample_metadata <- data.table::data.table()
 

@@ -1,13 +1,13 @@
-load_eset <- function(name,
-                      datadir,
-                      targetcolname,
-                      targetcol,
-                      targetname,
-                      controlname,
-                      targetlevelname,
-                      controllevelname,
-                      use_rawdata = FALSE,
-                      setid = 1) {
+geo_load_eset <- function(name,
+                          datadir,
+                          targetcolname,
+                          targetcol,
+                          targetname,
+                          controlname,
+                          targetlevelname,
+                          controllevelname,
+                          use_rawdata = FALSE,
+                          setid = 1) {
   # original GEO data
   eset <- GEOquery::getGEO(name,
                            destdir = datadir)[[setid]]
@@ -28,7 +28,7 @@ load_eset <- function(name,
 
   if (isTRUE(use_rawdata)) {
 
-    eset <- use_raw_data(
+    eset <- geo_use_raw_data(
       eset = eset,
       name = name,
       datadir = datadir

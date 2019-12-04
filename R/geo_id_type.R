@@ -1,4 +1,4 @@
-id_type <- function(expr, eset, idtype) {
+geo_id_type <- function(expr, eset, idtype) {
   stopifnot(idtype %in% c("entrez", "affy"))
   if (idtype == "entrez") {
     rownames(expr) <- as.character(eset@featureData@data$ENTREZ_GENE_ID)

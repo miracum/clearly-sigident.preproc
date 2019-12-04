@@ -1,4 +1,4 @@
-use_raw_data <- function(eset, name, datadir) {
+geo_use_raw_data <- function(eset, name, datadir) {
 
   rawdir <- paste0(datadir, "rawdata/")
   dir.create(rawdir)
