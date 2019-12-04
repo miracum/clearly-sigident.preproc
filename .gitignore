@@ -24,3 +24,4 @@ inst/doc
 /vignettes/*
 !/vignettes/*.Rmd
 !/.gitlab-ci.yml
+!/ci/
