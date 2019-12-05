@@ -1,9 +1,25 @@
+#' @title geo_create_diagnosis
+#'
+#' @description Helper function to transform the target variable into a
+#'   binary numeric diagnosis variable.
+#'
+#' @param vector A vector of characters. The target variable, consisting of
+#'   two levels, named `controlname` and `targetname`.
+#' @param controlname A character string. Name of the the controls,
+#'   specified in the 'target' column of `sample_metadata` (default: Control).
+#' @param targetname A character string. Name of the the targets, specified
+#'   in the 'target' column of `sample_metadata` (default: Target).
+#'
+#' @export
+#'
 geo_create_diagnosis <- function(vector, controlname, targetname) {
   diag <- as.vector(vector)
 
-  diagnosis <- gsub(controlname, "0", diag)
-  diagnosis <- gsub(targetname, "1", diagnosis)
+  levelnames <- c(0, 1)
+  names(levelnames) <- c(controlname, targetname)
 
-  outdat <- as.integer(diagnosis)
+  diagnosis <- plyr::revalue(diag, levelnames)
+  outdat <- as.numeric(diagnosis)
+
   return(outdat)
 }

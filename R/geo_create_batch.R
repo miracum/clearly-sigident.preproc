@@ -1,3 +1,9 @@
+#' @title geo_create_batch
+#'
+#' @description Helper function to create batch
+#'
+#' @inheritParams geo_create_diagnosisdesignbatch
+#'
 geo_create_batch <- function(sample_metadata) {
   studylist <- list()
 

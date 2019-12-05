@@ -47,7 +47,7 @@ plotdir <- "./plots/"
 dir.create(plotdir)
 
 # define idtype
-idtype = "affy"
+idtype <- "affy"
 ```
 
 # Define list that contains a representation of the studies metadata
@@ -83,6 +83,21 @@ studiesinfo <- list(
   )
 )
 ```
+
+In order to find these mapping information in the pheno data, one has probably to extract them manually from the studies, e.g. with the following commands for the study "GSE18842":
+
+```{r eval=FALSE}
+setid <- 1
+datadir <- "./geodata/data/"
+name <- "GSE18842"
+
+# download eset
+eset <- GEOquery::getGEO(name, destdir = datadir)[[setid]]
+
+# View eset in Rstudio
+View(Biobase::pData(eset))
+```
+
 
 # Load GEO datasets 
 
