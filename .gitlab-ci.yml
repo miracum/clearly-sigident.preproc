@@ -50,8 +50,9 @@ build_base_image:
     changes:
       - "data-raw/devstuffs.R"
       - "ci/Dockerfile"
-    - master
-    - development
+    refs:
+      - master
+      - development
   except:
     - tags
 
