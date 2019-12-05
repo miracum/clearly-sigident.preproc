@@ -54,7 +54,8 @@ build_base_image:
       - master
       - development
   except:
-    - tags
+    refs:
+      - tags
 
 check_package:
   stage: build
@@ -67,10 +68,12 @@ check_package:
     when: on_failure # upload check artifacts when job fails!
     expire_in: 1 week
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 create_manual:
   stage: build
@@ -82,10 +85,12 @@ create_manual:
       - "${CI_PROJECT_DIR}/ci/*.pdf"
     expire_in: 1 week
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 build_source:
   stage: build
@@ -96,10 +101,12 @@ build_source:
       - "${CI_PROJECT_DIR}/ci/*.tar.gz"
     expire_in: 1 week
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 build_binary:
   stage: build
@@ -110,10 +117,12 @@ build_binary:
       - "${CI_PROJECT_DIR}/ci/*.tar.gz"
     expire_in: 1 week
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 testing:
   stage: test
@@ -126,10 +135,12 @@ testing:
     paths:
       - public
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 testing:
   stage: test
@@ -138,10 +149,12 @@ testing:
   script:
     - R -e "devtools::test(pkg = '.')"
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 #check_errors:
 #  stage: check
@@ -163,10 +176,12 @@ install:
   script:
     - R -e "devtools::install(pkg = '.', upgrade = 'always')"
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
 
 compile_vignette:
   stage: vignette
@@ -179,7 +194,9 @@ compile_vignette:
     expire_in: 1 week
     expire_in: 1 month
   except:
-    - tags
+    refs:
+      - tags
   only:
-    - master
-    - development
+    refs:
+      - master
+      - development
