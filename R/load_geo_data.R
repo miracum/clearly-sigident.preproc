@@ -82,12 +82,6 @@ load_geo_data <- function(studiesinfo,
       use_rawdata = use_raw,
       setid = studiesinfo[[st]]$setid
     )
-    # assign eset to the global env
-    global_env_hack(
-      key = st,
-      val = eset,
-      pos = 1L
-    )
 
     # plot batch effects of single eset
     filename <- paste0(plotdir, "/", st, "_batch_effect_boxplot.jpg")

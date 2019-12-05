@@ -66,5 +66,14 @@ geo_load_eset <- function(name,
       datadir = datadir
     )
   }
+
+  # assign eset to the global env
+  global_env_hack(
+    key = name,
+    val = eset,
+    pos = 1L
+  )
+
+  # return eset as well
   return(eset)
 }
