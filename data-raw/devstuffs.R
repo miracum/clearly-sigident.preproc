@@ -19,7 +19,7 @@ my_desc$del("Maintainer")
 # Vignette Builder
 my_desc$set("VignetteBuilder" = "knitr")
 # Set the version
-my_desc$set_version("0.0.0.9000")
+my_desc$set_version("0.0.1")
 # The title of your package
 my_desc$set(Title = "Sigident Preprocessing")
 # The description of your package
