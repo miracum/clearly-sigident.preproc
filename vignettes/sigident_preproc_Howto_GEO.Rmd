@@ -23,7 +23,7 @@ The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/
 
 Please note, that the GEO functionality of this R package has only been tested with the platforms, listed below: 
 
-- GPL570 	[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array
+- GPL570 [HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array
 
 # Setup
 
