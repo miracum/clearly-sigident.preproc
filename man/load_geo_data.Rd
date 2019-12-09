@@ -4,7 +4,13 @@
 \alias{load_geo_data}
 \title{Load datasets from the GEO database}
 \usage{
-load_geo_data(studiesinfo, datadir, plotdir = "./plots/", idtype)
+load_geo_data(
+  studiesinfo,
+  datadir,
+  plotdir = "./plots/",
+  idtype,
+  visualize_batches = TRUE
+)
 }
 \arguments{
 \item{studiesinfo}{A list that contains specifications
@@ -19,6 +25,9 @@ plots. Default: "./plots/".}
 genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
 affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
 are being removed!}
+
+\item{visualize_batches}{A logical. Indicates, if batch effects and batch
+effect removals should be plotted (default: TRUE).}
 }
 \description{
 Load datasets that are stored on the GEO databse
