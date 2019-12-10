@@ -41,13 +41,21 @@ geo_load_eset <- function(name,
                           use_rawdata = FALSE,
                           setid = 1) {
   # original GEO data
-  eset <- GEOquery::getGEO(name,
-                           destdir = datadir)[[setid]]
+  eset <- GEOquery::getGEO(
+    name,
+    destdir = datadir
+  )[[setid]]
 
   # rename targetcol
   colnames(Biobase::pData(eset))[which(
     colnames(Biobase::pData(eset)) == targetcolname
   )] <- targetcol
+
+  # Biobase::pData(eset)[which(
+  #   levels(Biobase::pData(eset)[[targetcol]]) %in%
+  #     c(targetlevelname,
+  #       controllevelname)
+  # )]
 
   # rename levels of targetcol
   if (!is.null(targetlevelname)) {
