@@ -19,7 +19,7 @@ my_desc$del("Maintainer")
 # Vignette Builder
 my_desc$set("VignetteBuilder" = "knitr")
 # Set the version
-my_desc$set_version("0.0.1.9000")
+my_desc$set_version("0.0.1.9001")
 # The title of your package
 my_desc$set(Title = "Sigident Preprocessing")
 # The description of your package
@@ -77,7 +77,6 @@ usethis::use_package("gPCA", type="Imports")
 
 # Suggests
 usethis::use_package("testthat", type = "Suggests")
-usethis::use_package("devtools", type = "Suggests")
 usethis::use_package("rmarkdown", type = "Suggests")
 usethis::use_package("qpdf", type = "Suggests")
 usethis::use_package("knitr", type = "Suggests")

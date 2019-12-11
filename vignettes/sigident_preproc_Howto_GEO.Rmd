@@ -98,6 +98,22 @@ eset <- GEOquery::getGEO(name, destdir = datadir)[[setid]]
 View(Biobase::pData(eset))
 ```
 
+Please be aware, that currently, this package works only with binary classification, meaning, the target variable (specified in `targetcolname`) may only contain two levels. There are scenarios, where your target contains more than two levels. In such cases, this package supports two possible approaches:  
+
+- 1: You can specify only those two levels of interest with `controllevelname` and `targetlevelname`. During the loading process, the GEO sets will be reduced to only contain cases with these levels of interest.  
+- 2: You can specify more than one level for `controllevelname` and `targetlevelname`, repspectively. During the loading process, the levels specified in those variables will be summarized to one level, either "Control" or "Target", in the merged data set. In order to achieve a such summarization of levels, please separate them by using three vertical lines (e.g. '|||', unicode character 'U+007C'). There MUST NOT be any addional character between the levels to be separated and the three vertical lines. The following code gives an example on how a splitting could look like for the GEO set 'GSE58095': 
+
+```{r eval=FALSE}
+studiesinfo <- list(
+  "GSE58095" <- list(
+    setid = 1,
+    targetcolname = "characteristics_ch1.1",
+    controllevelname = "group: Control|||group: SSc|||time point: Early|||time point: Late",  
+    targetlevelname = "tissue: skin biopsy"
+  )
+)
+```
+
 
 # Load GEO datasets 
 
