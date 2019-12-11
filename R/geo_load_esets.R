@@ -51,27 +51,31 @@ geo_load_eset <- function(name,
     colnames(Biobase::pData(eset)) == targetcolname
   )] <- targetcol
 
-  # split levels, if more than one is provided for each targetlevelname
-  # and controllevelname (recognized by '|||')
-  if (grepl("(\\|){3}", targetlevelname)) {
-    targetlevelname <- strsplit(
-      targetlevelname, split = "|||", fixed = T
+  if (!is.null(targetlevelname)) {
+    # split levels, if more than one is provided for each targetlevelname
+    # and controllevelname (recognized by '|||')
+    if (grepl("(\\|){3}", targetlevelname)) {
+      targetlevelname <- strsplit(
+        targetlevelname, split = "|||", fixed = T
       )[[1]]
-  }
-  if (grepl("(\\|){3}", controllevelname)) {
-    controllevelname <- strsplit(
-      controllevelname, split = "|||", fixed = T
-      )[[1]]
-  }
-  if (!any(targetlevelname %in% levels(Biobase::pData(eset)[[targetcol]]))) {
-    stop(paste0("\nLevel(s) provided with targetlevelname are ",
-                "not present in your data.\n"))
-  }
-  if (!any(controllevelname %in% levels(Biobase::pData(eset)[[targetcol]]))) {
-    stop(paste0("\nLevel(s) provided with controllevelname are ",
-                "not present in your data.\n"))
+    }
+    if (!any(targetlevelname %in% levels(Biobase::pData(eset)[[targetcol]]))) {
+      stop(paste0("\nLevel(s) provided with targetlevelname are ",
+                  "not present in your data.\n"))
+    }
   }
 
+  if (!is.null(targetlevelname)) {
+    if (grepl("(\\|){3}", controllevelname)) {
+      controllevelname <- strsplit(
+        controllevelname, split = "|||", fixed = T
+      )[[1]]
+    }
+    if (!any(controllevelname %in% levels(Biobase::pData(eset)[[targetcol]]))) {
+      stop(paste0("\nLevel(s) provided with controllevelname are ",
+                  "not present in your data.\n"))
+    }
+  }
   # reduce pheno data to hold only cases of which we have
   # targetcolumname and controllevelname
   Biobase::pData(eset) <- Biobase::pData(eset)[which(
@@ -81,15 +85,22 @@ geo_load_eset <- function(name,
   # rename levels of targetcol
   if (!is.null(targetlevelname)) {
     t_levelnames <- rep(targetname, length(targetlevelname))
-    c_levelnames <- rep(controlname, length(controllevelname))
     names(t_levelnames) <- targetlevelname
-    names(c_levelnames) <- controllevelname
-
-    levelnames <- c(t_levelnames, c_levelnames)
-
-    eset[[targetcol]] <-
-      plyr::revalue(eset[[targetcol]], levelnames)
+  } else {
+    t_levelnames <- NULL
   }
+
+  if (!is.null(targetlevelname)) {
+    c_levelnames <- rep(controlname, length(controllevelname))
+    names(c_levelnames) <- controllevelname
+  } else {
+    c_levelnames <- NULL
+  }
+
+  levelnames <- c(t_levelnames, c_levelnames)
+
+  eset[[targetcol]] <-
+    plyr::revalue(eset[[targetcol]], levelnames)
 
   if (isTRUE(use_rawdata)) {
 

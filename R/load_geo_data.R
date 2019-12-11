@@ -59,8 +59,12 @@ load_geo_data <- function(studiesinfo,
   for (st in names(studiesinfo)) {
     stopifnot(
       is.character(studiesinfo[[st]]$targetcolname),
-      is.character(studiesinfo[[st]]$targetlevelname),
-      is.character(studiesinfo[[st]]$controllevelname),
+      is.character(studiesinfo[[st]]$targetlevelname) ||
+        is.null(studiesinfo[[st]]$targetlevelname),
+      is.character(studiesinfo[[st]]$controllevelname) ||
+        is.null(studiesinfo[[st]]$controllevelname),
+      !is.null(studiesinfo[[st]]$controllevelname) &&
+        !is.null(studiesinfo[[st]]$targetlevelname),
       is.logical(studiesinfo[[st]]$use_rawdata) ||
         is.null(studiesinfo[[st]]$use_rawdata),
       is.numeric(studiesinfo[[st]]$setid)
