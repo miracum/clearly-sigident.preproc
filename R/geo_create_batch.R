@@ -2,7 +2,7 @@
 #'
 #' @description Helper function to create batch
 #'
-#' @inheritParams geo_create_diagnosisdesignbatch
+#' @inheritParams geo_create_diagnosisbatch
 #'
 geo_create_batch <- function(sample_metadata) {
   studylist <- list()

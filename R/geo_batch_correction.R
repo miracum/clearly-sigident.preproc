@@ -6,8 +6,8 @@
 #' @param mergedset A large Expression Set. The output of the function
 #'   `geo_merge`. Please note, that mergedset holds data, which are not
 #'   yet batch corrected.
-#' @param design A two-column matrix. Holds information on the studie's
-#'   target variable and is created by `stats::model.matrix(~ diagnosis)`.
+#' @param diagnosis A vector of integers, holding the binary outcome variable
+#'   (0 = "Control", 1 = "Target").
 #'
 #' @details This function takes a Bioconductor's ExpressionSet class (the
 #'   output of the function `geo_merge`) and outputs a batch corrected
@@ -29,18 +29,38 @@
 #'
 geo_batch_correction <- function(mergedset,
                                  batch,
-                                 design,
+                                 diagnosis,
                                  idtype) {
   # generate data frame with expression values and model matrix
   # regardarding diagnosis
   #
 
-  df <- mergedset@assayData$exprs
-  edata <- sva::ComBat(
-    df,
-    batch = batch,
-    mod = design,
-    par.prior = T
+  # reduce assay Data to hold only cases of remaining cases
+  df <- mergedset@assayData$exprs[, colnames(mergedset@assayData$exprs) %in%
+                                    mergedset@phenoData$geo_accession]
+  edata <- tryCatch(
+    expr = {
+      message("\nTrying batch effect correction with covariates\n")
+      edata <- sva::ComBat(
+        df,
+        batch = batch,
+        mod = stats::model.matrix(~ diagnosis),
+        par.prior = T
+      )
+      edata
+    }, error = function(e) {
+      message(e)
+      message(paste0("\nERROR: performing now batch effect correction ",
+                     "without covariates\n"))
+      edata <- sva::ComBat(
+        df,
+        batch = batch,
+        par.prior = T
+      )
+      edata
+    }, finally = function(f) {
+      return(edata)
+    }
   )
   edata <- geo_id_type(expr = edata,
                        eset = mergedset,

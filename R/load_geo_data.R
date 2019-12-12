@@ -25,11 +25,11 @@
 #'   genes in the rows and samples in the columns. `sample_metadata` is a
 #'   data.frame, which holds information on the samples which are included
 #'   in the studies, including if they are a "Target" or a "Control".
-#'   `diagnosis` (a binary coding of the target variable), `design` () and
+#'   `diagnosis` (a binary coding of the target variable) and
 #'   `batch` () are also provided to the global environment to be used with
 #'   other functions of the `sigident` R package.
 #'
-#' @seealso sigident
+#' @seealso \code{sigident}
 #'
 #' @import data.table
 #'
@@ -63,8 +63,8 @@ load_geo_data <- function(studiesinfo,
         is.null(studiesinfo[[st]]$targetlevelname),
       is.character(studiesinfo[[st]]$controllevelname) ||
         is.null(studiesinfo[[st]]$controllevelname),
-      !is.null(studiesinfo[[st]]$controllevelname) &&
-        !is.null(studiesinfo[[st]]$targetlevelname),
+      !(is.null(studiesinfo[[st]]$controllevelname) &&
+        is.null(studiesinfo[[st]]$targetlevelname)),
       is.logical(studiesinfo[[st]]$use_rawdata) ||
         is.null(studiesinfo[[st]]$use_rawdata),
       is.numeric(studiesinfo[[st]]$setid)
@@ -113,7 +113,7 @@ load_geo_data <- function(studiesinfo,
     eset_append <- eset
 
     # overwrite pheno data
-    Biobase::pData(eset_append) = p_new
+    Biobase::pData(eset_append) <- p_new
 
     # append eset to out_mergeset
     out_mergeset <- c(out_mergeset, eset_append)
@@ -151,23 +151,23 @@ load_geo_data <- function(studiesinfo,
 
   # perform batch correction
   # conducting gPCA for batch effect detection
-  DF <- mergedset@assayData$exprs
+  m_df <- mergedset@assayData$exprs
 
   # define batches with number of samples
   batch <- geo_create_batch(sample_metadata = sample_metadata)
 
   if (visualize_batches) {
-    gPCA_before <- geo_batch_detection(mergeset = DF,
+    gpca_before <- geo_batch_detection(mergeset = m_df,
                                        batch = batch)
     filename <- paste0(plotdir, "PCplot_before.png")
-    plot_batchplot(correction_obj = gPCA_before,
+    plot_batchplot(correction_obj = gpca_before,
                    filename = filename,
                    time = "before")
   }
-  rm(DF)
+  rm(m_df)
 
   # generate list dd with diagnosis and design
-  dd <- geo_create_diagnosisdesignbatch(
+  dd <- geo_create_diagnosisbatch(
     sample_metadata = sample_metadata
   )
 
@@ -176,14 +176,6 @@ load_geo_data <- function(studiesinfo,
   global_env_hack(
     key = "diagnosis",
     val = diagnosis,
-    pos = 1L
-  )
-
-  design <- dd$design
-  # assign design to the global env
-  global_env_hack(
-    key = "design",
-    val = design,
     pos = 1L
   )
 
@@ -197,7 +189,7 @@ load_geo_data <- function(studiesinfo,
 
   mergeset <- geo_batch_correction(mergedset = mergedset,
                                    batch = batch,
-                                   design = design,
+                                   diagnosis = diagnosis,
                                    idtype = idtype)
   # assign mergeset to the global env
   global_env_hack(
@@ -213,13 +205,13 @@ load_geo_data <- function(studiesinfo,
                          plot_title = "Merged data after batch correction",
                          filename = filename)
 
-    gPCA_after <- geo_batch_detection(mergeset = mergeset,
+    gpca_after <- geo_batch_detection(mergeset = mergeset,
                                       batch = batch)
     filename <- paste0(plotdir, "PCplot_after.png")
-    plot_batchplot(correction_obj = gPCA_after,
+    plot_batchplot(correction_obj = gpca_after,
                    filename = filename,
                    time = "after")
-    rm(gPCA_after, gPCA_before, filename)
+    rm(gpca_after, gpca_before, filename)
   }
 
   # perform garbage collection

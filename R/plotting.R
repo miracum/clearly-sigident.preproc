@@ -55,4 +55,3 @@ plot_batchplot <- function(correction_obj,
   })
   grDevices::dev.off()
 }
-

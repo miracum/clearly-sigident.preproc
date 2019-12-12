@@ -1,13 +1,13 @@
-#' @title geo_create_diagnosisdesignbatch
+#' @title geo_create_diagnosisbatch
 #'
-#' @description Helper function to create diagnosis, design and batch
+#' @description Helper function to create diagnosis and batch
 #'
 #' @param sample_metadata A data frame. The data frame holding the
 #'   sample metadata.
 #'
 #' @export
 
-geo_create_diagnosisdesignbatch <- function(sample_metadata) {
+geo_create_diagnosisbatch <- function(sample_metadata) {
 
 
   stopifnot(
@@ -24,16 +24,12 @@ geo_create_diagnosisdesignbatch <- function(sample_metadata) {
   diagnosis <- geo_create_diagnosis(vector = discoverydata,
                                     controlname = controlname,
                                     targetname = targetname)
-  # create design
-  design <- stats::model.matrix(~ diagnosis)
 
   # create batch
   batch <- geo_create_batch(sample_metadata = sample_metadata)
 
   return(list(
     diagnosis = diagnosis,
-    design = design,
     batch = batch
   ))
 }
-

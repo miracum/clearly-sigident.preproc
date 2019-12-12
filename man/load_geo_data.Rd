@@ -44,7 +44,7 @@ The functions writes objects to the global environment, including
   genes in the rows and samples in the columns. `sample_metadata` is a
   data.frame, which holds information on the samples which are included
   in the studies, including if they are a "Target" or a "Control".
-  `diagnosis` (a binary coding of the target variable), `design` () and
+  `diagnosis` (a binary coding of the target variable) and
   `batch` () are also provided to the global environment to be used with
   other functions of the `sigident` R package.
 }
@@ -52,5 +52,5 @@ The functions writes objects to the global environment, including
 \url{https://gitlab.miracum.org/clearly/sigident}
 }
 \seealso{
-sigident
+\code{sigident}
 }

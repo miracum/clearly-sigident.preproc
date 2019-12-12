@@ -65,7 +65,7 @@ geo_load_eset <- function(name,
     }
   }
 
-  if (!is.null(targetlevelname)) {
+  if (!is.null(controllevelname)) {
     if (grepl("(\\|){3}", controllevelname)) {
       controllevelname <- strsplit(
         controllevelname, split = "|||", fixed = T
@@ -76,6 +76,7 @@ geo_load_eset <- function(name,
                   "not present in your data.\n"))
     }
   }
+
   # reduce pheno data to hold only cases of which we have
   # targetcolumname and controllevelname
   Biobase::pData(eset) <- Biobase::pData(eset)[which(
@@ -90,7 +91,7 @@ geo_load_eset <- function(name,
     t_levelnames <- NULL
   }
 
-  if (!is.null(targetlevelname)) {
+  if (!is.null(controllevelname)) {
     c_levelnames <- rep(controlname, length(controllevelname))
     names(c_levelnames) <- controllevelname
   } else {

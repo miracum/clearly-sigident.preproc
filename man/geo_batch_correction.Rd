@@ -4,7 +4,7 @@
 \alias{geo_batch_correction}
 \title{geo_batch_correction}
 \usage{
-geo_batch_correction(mergedset, batch, design, idtype)
+geo_batch_correction(mergedset, batch, diagnosis, idtype)
 }
 \arguments{
 \item{mergedset}{A large Expression Set. The output of the function
@@ -13,8 +13,8 @@ yet batch corrected.}
 
 \item{batch}{Takes the results from \code{create_batch()} as input.}
 
-\item{design}{A two-column matrix. Holds information on the studie's
-target variable and is created by `stats::model.matrix(~ diagnosis)`.}
+\item{diagnosis}{A vector of integers, holding the binary outcome variable
+(0 = "Control", 1 = "Target").}
 
 \item{idtype}{A character string. The type of ID used to name the
 genes. One of 'entrez' or 'affy' intended to use either entrez IDs or

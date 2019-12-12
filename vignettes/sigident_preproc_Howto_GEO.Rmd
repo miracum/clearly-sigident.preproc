@@ -114,6 +114,20 @@ studiesinfo <- list(
 )
 ```
 
+You can also specify all categories of one GEO set to belong to one group. For example, by setting `controllevelname` to NULL, all categories specified in `targetlevelname` are treated as targets and will internally be renamed accordingly. 
+
+```{r eval=FALSE}
+studiesinfo <- list(
+  "GSE58095" <- list(
+    setid = 1,
+    targetcolname = "characteristics_ch1.1",
+    controllevelname = NULL,  
+    targetlevelname = "tissue: skin biopsy|||group: Control|||group: SSc|||time point: Early"
+  )
+)
+```
+
+Caution: categroies not specified in either `targetlevelname` or `controllevelname` will be excluded from the merging!
 
 # Load GEO datasets 
 
@@ -157,7 +171,7 @@ knitr::include_graphics(paste0(plotdir, "PCplot_after.png"))
 
 # List files in .Globalenv
 
-All downloaded datasets and resulting objects are assigned to the global environment and are suitable to be used in the subsequent analyses implemented in the R package `sigident`: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident).
+All downloaded datasets and resulting objects, including `diagnosis`, `mergedset` and `mergeset` are assigned to the global environment and are suitable to be used in the subsequent analyses implemented in the R package `sigident`: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident).
 
 ```{r}
 ls()
