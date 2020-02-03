@@ -50,7 +50,8 @@ load_geo_data <- function(studiesinfo,
     is.list(studiesinfo),
     is.character(datadir),
     idtype %in% c("affy", "entrez"),
-    is.logical(visualize_batches)
+    is.logical(viz_batch_hist),
+    is.logical(viz_batch_gpca)
   )
 
   targetcol <- "target"
