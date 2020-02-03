@@ -9,7 +9,8 @@ load_geo_data(
   datadir,
   plotdir = "./plots/",
   idtype,
-  visualize_batches = TRUE
+  viz_batch_hist = TRUE,
+  viz_batch_gpca = TRUE
 )
 }
 \arguments{
@@ -26,8 +27,11 @@ genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
 affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
 are being removed!}
 
-\item{visualize_batches}{A logical. Indicates, if batch effects and batch
-effect removals should be plotted (default: TRUE).}
+\item{viz_batch_hist}{A logical. Indicates, if batch effects and batch
+effect removals via histograms should be plotted (default: TRUE).}
+
+\item{viz_batch_gpca}{A logical. Indicates, if batch effects and batch
+effect removals via gPCA (gPCA::PCplot) should be plotted (default: TRUE).}
 }
 \description{
 Load datasets that are stored on the GEO databse

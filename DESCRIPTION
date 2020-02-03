@@ -42,4 +42,4 @@ Suggests:
     qpdf,
     knitr,
     lintr
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2

@@ -11,8 +11,10 @@
 #'   genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
 #'   affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
 #'   are being removed!
-#' @param visualize_batches A logical. Indicates, if batch effects and batch
-#'   effect removals should be plotted (default: TRUE).
+#' @param viz_batch_hist A logical. Indicates, if batch effects and batch
+#'   effect removals via histograms should be plotted (default: TRUE).
+#' @param viz_batch_gpca A logical. Indicates, if batch effects and batch
+#'   effect removals via gPCA (gPCA::PCplot) should be plotted (default: TRUE).
 #'
 #' @details The functions writes objects to the global environment, including
 #'   the expression sets of the studies specified in `studiesinfo` - the
@@ -41,7 +43,8 @@ load_geo_data <- function(studiesinfo,
                           datadir,
                           plotdir = "./plots/",
                           idtype,
-                          visualize_batches = TRUE) {
+                          viz_batch_hist = TRUE,
+                          viz_batch_gpca = TRUE) {
 
   stopifnot(
     is.list(studiesinfo),
@@ -91,7 +94,7 @@ load_geo_data <- function(studiesinfo,
       setid = studiesinfo[[st]]$setid
     )
 
-    if (visualize_batches) {
+    if (viz_batch_hist) {
       # plot batch effects of single eset
       filename <- paste0(plotdir, "/", st, "_batch_effect_boxplot.jpg")
       batch_effect_boxplot(eset = geo_create_expressionset(eset, idtype),
@@ -141,7 +144,7 @@ load_geo_data <- function(studiesinfo,
     pos = 1L
   )
 
-  if (visualize_batches) {
+  if (viz_batch_hist) {
     # plot batch effects of mergedset (before batch correction)
     filename <- paste0(plotdir, "/Merged_before_batch_effect_boxplot.jpg")
     batch_effect_boxplot(eset = mergedset@assayData$exprs,
@@ -156,7 +159,7 @@ load_geo_data <- function(studiesinfo,
   # define batches with number of samples
   batch <- geo_create_batch(sample_metadata = sample_metadata)
 
-  if (visualize_batches) {
+  if (viz_batch_gpca) {
     gpca_before <- geo_batch_detection(mergeset = m_df,
                                        batch = batch)
     filename <- paste0(plotdir, "PCplot_before.png")
@@ -198,13 +201,16 @@ load_geo_data <- function(studiesinfo,
     pos = 1L
   )
 
-  if (visualize_batches) {
+  if (viz_batch_hist) {
     # plot batch effects of mergeset (after batch correction)
     filename <- paste0(plotdir, "/Merged_after_batch_effect_boxplot.jpg")
     batch_effect_boxplot(eset = mergeset,
                          plot_title = "Merged data after batch correction",
                          filename = filename)
+    rm(filename)
+  }
 
+  if (viz_batch_gpca) {
     gpca_after <- geo_batch_detection(mergeset = mergeset,
                                       batch = batch)
     filename <- paste0(plotdir, "PCplot_after.png")
