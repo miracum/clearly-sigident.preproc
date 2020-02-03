@@ -1,4 +1,4 @@
-geo_id;setid;targetcolname;targetlevelname;controllevelname
-GSE18842;1;source_name_ch1;Human Lung Tumor;Human Lung Control
-GSE19804;1;source_name_ch1;frozen tissue of primary tumor;frozen tissue of adjacent normal
-GSE19188;1;characteristics_ch1;tissue type: tumor;tissue type: healthy
+geo_id;setid;use_rawdata;targetcolname;targetlevelname;controllevelname
+GSE18842;1;0;source_name_ch1;Human Lung Tumor;Human Lung Control
+GSE19804;1;0;source_name_ch1;frozen tissue of primary tumor;frozen tissue of adjacent normal
+GSE19188;1;1;characteristics_ch1;tissue type: tumor;tissue type: healthy

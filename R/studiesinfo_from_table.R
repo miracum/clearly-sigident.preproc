@@ -12,7 +12,7 @@
 studiesinfo_from_table <- function(tab) {
 
   stopifnot(
-    ncol(tab) >= 4,
+    ncol(tab) >= 5,
     nrow(tab) >= 2,
     c("geo_id",
       "targetcolname",
@@ -32,7 +32,9 @@ studiesinfo_from_table <- function(tab) {
       targetlevelname = tab[get("geo_id") ==
                               studyname, get("targetlevelname")],
       controllevelname = tab[get("geo_id") ==
-                               studyname, get("controllevelname")]
+                               studyname, get("controllevelname")],
+      use_rawdata = tab[get("geo_id") ==
+                          studyname, as.logical(get("use_rawdata"))]
     )
   }
 
