@@ -1,22 +1,38 @@
 geo_use_raw_data <- function(eset, name, datadir) {
 
-  rawdir <- paste0(datadir, "rawdata/")
+  rawdir <- paste0(datadir, "/rawdata/")
   dir.create(rawdir)
-  exdir <- paste0(rawdir, "celfiles/")
+  exdir <- paste0(rawdir, "/celfiles/")
+  # remove preexisting exdir
+  cf <- list.files(exdir)
+  if (!identical(cf, character(0))) {
+    file.remove(paste0(exdir, "/", cf))
+  }
+  unlink(exdir, recursive = T, force = T)
+  # create exdir
   dir.create(exdir)
 
-  GEOquery::getGEOSuppFiles(name, baseDir = rawdir)
+  if (!file.exists(paste0(rawdir, name, "/", name, "_RAW.tar"))) {
+    GEOquery::getGEOSuppFiles(
+      GEO = name,
+      makeDirectory = TRUE,
+      baseDir = rawdir,
+      filter_regex = "[.tar]$"
+    )
+  }
 
-  tar_file <- list.files(paste0(rawdir, name), pattern = ".tar$")
+  tar_file <- list.files(paste0(rawdir, name), pattern = "[.tar]$")
 
   stopifnot(length(tar_file) == 1)
 
   utils::untar(paste0(rawdir, name, "/", tar_file), exdir = exdir)
 
-  cels <- list.files(exdir, pattern = "[gz]")
+  cels <- list.files(exdir, pattern = "[gz]$")
 
   tryCatch({
-    sapply(paste(exdir, cels, sep = "/"), GEOquery::gunzip)
+    sapply(paste(exdir, cels, sep = "/"), GEOquery::gunzip,
+           overwrite = T,
+           remove = F)
     cmd <-
       paste0("bash -c 'ls ",
              exdir,
@@ -31,6 +47,7 @@ geo_use_raw_data <- function(eset, name, datadir) {
   cels <- list.files(exdir, pattern = "CEL$")
 
   celfiles <- paste0(exdir, cels)
+  # path must be relative for justGCRMA to work!
   eset_c <- gcrma::justGCRMA(filenames = celfiles, fast = TRUE)
   gc()
 

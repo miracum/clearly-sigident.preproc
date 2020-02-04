@@ -100,11 +100,9 @@ geo_load_eset <- function(name,
 
   levelnames <- c(t_levelnames, c_levelnames)
 
-  eset[[targetcol]] <-
-    plyr::revalue(eset[[targetcol]], levelnames)
+  eset[[targetcol]] <- plyr::revalue(eset[[targetcol]], levelnames)
 
   if (isTRUE(use_rawdata)) {
-
     eset <- geo_use_raw_data(
       eset = eset,
       name = name,

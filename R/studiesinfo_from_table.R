@@ -17,7 +17,8 @@ studiesinfo_from_table <- function(tab) {
     c("geo_id",
       "targetcolname",
       "targetlevelname",
-      "controllevelname") %in% colnames(tab)
+      "controllevelname") %in% colnames(tab),
+    sum(tab[, get("use_rawdata")] %in% c(0, 1)) == nrow(tab)
   )
 
   # init outlist
@@ -34,7 +35,9 @@ studiesinfo_from_table <- function(tab) {
       controllevelname = tab[get("geo_id") ==
                                studyname, get("controllevelname")],
       use_rawdata = tab[get("geo_id") ==
-                          studyname, as.logical(get("use_rawdata"))]
+                          studyname, as.logical(as.numeric(
+                            get("use_rawdata"))
+                            )]
     )
   }
 
