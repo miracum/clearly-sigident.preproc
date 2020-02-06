@@ -1,1 +1,1 @@
-geo_id;setid;use_rawdata;targetcolname;targetlevelname;controllevelname
+geo_id;setid;use_rawdata;targetcolname;targetlevelname;controllevelname;diag_validation_study;prog_validation_study;timecolname;statuscolname;statuslevel_alive;statuslevel_deceased;status_na
