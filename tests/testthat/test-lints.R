@@ -29,7 +29,9 @@ test_that(
         "geo_use_raw_data.R" = NULL,
         "global_env_hack.R" = NULL,
         "load_geo_data.R" = NULL,
-        "plotting.R" = NULL
+        "plotting.R" = NULL,
+        "studiesinfo_from_table.R" = NULL,
+        "utils.R" = NULL
       ),
       "tests/testthat" = list(
         "test-lints.R" = NULL
