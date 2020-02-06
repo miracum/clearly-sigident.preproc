@@ -1,6 +1,6 @@
 Package: sigident.preproc
 Title: Sigident Preprocessing
-Version: 0.0.1.9002
+Version: 0.0.2
 Authors@R: 
     c(person(given = "Lorenz A.",
              family = "Kapsner",
@@ -23,7 +23,7 @@ URL: https://gitlab.miracum.org/clearly/sigident.preproc
 BugReports: https://gitlab.miracum.org/clearly/sigident.preproc/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
-Date: 2019-12-12
+Date: 2020-02-06
 biocViews: 
 Imports: 
     data.table,

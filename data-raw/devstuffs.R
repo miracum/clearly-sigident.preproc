@@ -19,7 +19,7 @@ my_desc$del("Maintainer")
 # Vignette Builder
 my_desc$set("VignetteBuilder" = "knitr")
 # Set the version
-my_desc$set_version("0.0.1.9002")
+my_desc$set_version("0.0.2")
 # The title of your package
 my_desc$set(Title = "Sigident Preprocessing")
 # The description of your package
@@ -40,7 +40,7 @@ my_desc$set("biocViews" = "")
 my_desc$write(file = "DESCRIPTION")
 
 # License
-usethis::use_gpl3_license(name = "Universitätsklinikum Erlangen")
+#usethis::use_gpl3_license(name = "Universitätsklinikum Erlangen")
 
 
 # add Imports and Depends
