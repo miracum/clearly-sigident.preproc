@@ -9,7 +9,7 @@ load_geo_data(
   datadir,
   plotdir = "./plots/",
   idtype,
-  viz_batch_hist = TRUE,
+  viz_batch_boxp = TRUE,
   viz_batch_gpca = TRUE
 )
 }
@@ -28,7 +28,7 @@ genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
 affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
 are being removed!}
 
-\item{viz_batch_hist}{A logical. Indicates, if batch effects and batch
+\item{viz_batch_boxp}{A logical. Indicates, if batch effects and batch
 effect removals via histograms should be plotted (default: TRUE).}
 
 \item{viz_batch_gpca}{A logical. Indicates, if batch effects and batch

@@ -12,7 +12,7 @@
 #'   genes. One of 'entrez' or 'affy' intended to use either entrez IDs or
 #'   affy IDs. Caution: when using entrez IDs, missing and duplicated IDs
 #'   are being removed!
-#' @param viz_batch_hist A logical. Indicates, if batch effects and batch
+#' @param viz_batch_boxp A logical. Indicates, if batch effects and batch
 #'   effect removals via histograms should be plotted (default: TRUE).
 #' @param viz_batch_gpca A logical. Indicates, if batch effects and batch
 #'   effect removals via gPCA (gPCA::PCplot) should be plotted (default: TRUE).
@@ -44,14 +44,14 @@ load_geo_data <- function(studiesinfo,
                           datadir,
                           plotdir = "./plots/",
                           idtype,
-                          viz_batch_hist = TRUE,
+                          viz_batch_boxp = TRUE,
                           viz_batch_gpca = TRUE) {
 
   stopifnot(
     is.list(studiesinfo),
     is.character(datadir),
     idtype %in% c("affy", "entrez"),
-    is.logical(viz_batch_hist),
+    is.logical(viz_batch_boxp),
     is.logical(viz_batch_gpca)
   )
 
@@ -96,7 +96,7 @@ load_geo_data <- function(studiesinfo,
       setid = studiesinfo[[st]]$setid
     )
 
-    if (viz_batch_hist) {
+    if (viz_batch_boxp) {
       # plot batch effects of single eset
       filename <- paste0(plotdir, "/", st, "_batch_effect_boxplot.jpg")
       batch_effect_boxplot(eset = geo_create_expressionset(eset, idtype),
@@ -146,7 +146,7 @@ load_geo_data <- function(studiesinfo,
     pos = 1L
   )
 
-  if (viz_batch_hist) {
+  if (viz_batch_boxp) {
     # plot batch effects of mergedset (before batch correction)
     filename <- paste0(plotdir, "/Merged_before_batch_effect_boxplot.jpg")
     batch_effect_boxplot(eset = mergedset@assayData$exprs,
@@ -203,7 +203,7 @@ load_geo_data <- function(studiesinfo,
     pos = 1L
   )
 
-  if (viz_batch_hist) {
+  if (viz_batch_boxp) {
     # plot batch effects of mergeset (after batch correction)
     filename <- paste0(plotdir, "/Merged_after_batch_effect_boxplot.jpg")
     batch_effect_boxplot(eset = mergeset,

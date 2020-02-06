@@ -16,7 +16,7 @@ dir.create(plotdir)
 # define idtype
 idtype <- "affy"
 
-viz_batch_hist = F
+viz_batch_boxp = F
 viz_batch_gpca = F
 
 # test studiesinfo
@@ -74,5 +74,5 @@ load_geo_data(studiesinfo = studiesinfo,
               datadir = datadir,
               plotdir = plotdir,
               idtype = idtype,
-              viz_batch_hist = F,
+              viz_batch_boxp = F,
               viz_batch_gpca = F)
