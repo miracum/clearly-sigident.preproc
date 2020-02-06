@@ -79,7 +79,7 @@ load_geo_data <- function(studiesinfo,
     use_raw <- ifelse(
       is.null(studiesinfo[[st]]$use_rawdata),
       FALSE,
-      is.null(studiesinfo[[st]]$use_rawdata)
+      studiesinfo[[st]]$use_rawdata
     )
 
     # load eset
