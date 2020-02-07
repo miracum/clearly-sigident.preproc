@@ -76,3 +76,14 @@ load_geo_data(studiesinfo = studiesinfo,
               idtype = idtype,
               viz_batch_boxp = F,
               viz_batch_gpca = F)
+
+
+tab <- data.table::fread("inst/demo_files/example_import.csv")
+
+# diag
+diag_studiesinfo(tab, "discovery")
+diag_studiesinfo(tab, "validation")
+
+# prog
+prog_studiesinfo(tab, "discovery")
+prog_studiesinfo(tab, "validation")

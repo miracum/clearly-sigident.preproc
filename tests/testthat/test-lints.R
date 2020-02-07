@@ -30,7 +30,8 @@ test_that(
         "global_env_hack.R" = NULL,
         "load_geo_data.R" = NULL,
         "plotting.R" = NULL,
-        "studiesinfo_from_table.R" = NULL,
+        "diag_studiesinfo.R" = NULL,
+        "prog_studiesinfo.R" = NULL,
         "utils.R" = NULL
       ),
       "tests/testthat" = list(
