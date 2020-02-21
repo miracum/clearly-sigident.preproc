@@ -4,8 +4,8 @@
 #'
 #' @param studiesinfo A list that contains specifications
 #'   on the studie's / studies' meta data.
-#' @param datadir A character string. Path to the data-folder. CAUTION: this
-#'   needs to be a relative path for the function "gcrma::justGCRMA" to work!!
+#' @param datadir A character string. Path to the folder to store the
+#'   downloaded gene data sets (default: tempdir()).
 #' @param plotdir A character string. Path to the folder to store resulting
 #'   plots. Default: "./plots/".
 #' @param idtype A character string. The type of ID used to name the
@@ -41,7 +41,7 @@
 #' @export
 
 load_geo_data <- function(studiesinfo,
-                          datadir,
+                          datadir = tempdir(),
                           plotdir = "./plots/",
                           idtype,
                           viz_batch_boxp = TRUE,

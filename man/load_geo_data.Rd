@@ -6,7 +6,7 @@
 \usage{
 load_geo_data(
   studiesinfo,
-  datadir,
+  datadir = tempdir(),
   plotdir = "./plots/",
   idtype,
   viz_batch_boxp = TRUE,
@@ -17,8 +17,8 @@ load_geo_data(
 \item{studiesinfo}{A list that contains specifications
 on the studie's / studies' meta data.}
 
-\item{datadir}{A character string. Path to the data-folder. CAUTION: this
-needs to be a relative path for the function "gcrma::justGCRMA" to work!!}
+\item{datadir}{A character string. Path to the folder to store the
+downloaded gene data sets (default: tempdir()).}
 
 \item{plotdir}{A character string. Path to the folder to store resulting
 plots. Default: "./plots/".}
