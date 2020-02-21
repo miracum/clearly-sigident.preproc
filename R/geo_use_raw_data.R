@@ -44,11 +44,13 @@ geo_use_raw_data <- function(eset, name, datadir) {
     print(e)
   })
 
-  cels <- list.files(exdir, pattern = "CEL$")
-
-  celfiles <- paste0(exdir, cels)
+  celfiles <- list.files(exdir, pattern = "CEL$")
   # path must be relative for justGCRMA to work!
-  eset_c <- gcrma::justGCRMA(filenames = celfiles, fast = TRUE)
+  eset_c <- gcrma::justGCRMA(
+    filenames = celfiles,
+    fast = TRUE,
+    celfile.path = exdir
+  )
   gc()
 
   p_data <- Biobase::pData(eset)
