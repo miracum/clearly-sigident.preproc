@@ -1,6 +1,6 @@
 Package: sigident.preproc
 Title: Sigident Preprocessing
-Version: 0.0.3
+Version: 0.0.3.9001
 Authors@R: 
     c(person(given = "Lorenz A.",
              family = "Kapsner",
@@ -42,4 +42,3 @@ Suggests:
     qpdf,
     knitr,
     lintr
-RoxygenNote: 7.1.0
