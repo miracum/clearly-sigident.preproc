@@ -25,3 +25,4 @@ inst/doc
 !/vignettes/*.Rmd
 !/.gitlab-ci.yml
 !/ci/
+/.vscode

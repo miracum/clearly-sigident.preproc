@@ -90,6 +90,7 @@ usethis::use_build_ignore("vignettes/plots")
 usethis::use_build_ignore("geodata")
 usethis::use_build_ignore("plots")
 usethis::use_build_ignore("ci")
+usethis::use_build_ignore(".vscode")
 
 # gitignore
 usethis::use_git_ignore("/*")
@@ -114,6 +115,7 @@ usethis::use_git_ignore("/.Rhistory")
 usethis::use_git_ignore("/*.Rproj")
 usethis::use_git_ignore("/.Rproj*")
 usethis::use_git_ignore("/.RData")
+usethis::use_git_ignore("/.vscode")
 
 # code coverage
 #covr::package_coverage()
