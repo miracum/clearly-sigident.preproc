@@ -19,7 +19,7 @@ my_desc$del("Maintainer")
 # Vignette Builder
 my_desc$set("VignetteBuilder" = "knitr")
 # Set the version
-my_desc$set_version("0.0.3.9001")
+my_desc$set_version("0.0.3.9002")
 # The title of your package
 my_desc$set(Title = "Sigident Preprocessing")
 # The description of your package
@@ -91,6 +91,7 @@ usethis::use_build_ignore("geodata")
 usethis::use_build_ignore("plots")
 usethis::use_build_ignore("ci")
 usethis::use_build_ignore(".vscode")
+usethis::use_build_ignore(".lintr")
 
 # gitignore
 usethis::use_git_ignore("/*")
@@ -116,6 +117,7 @@ usethis::use_git_ignore("/*.Rproj")
 usethis::use_git_ignore("/.Rproj*")
 usethis::use_git_ignore("/.RData")
 usethis::use_git_ignore("/.vscode")
+usethis::use_git_ignore("!/.lintr")
 
 # code coverage
 #covr::package_coverage()

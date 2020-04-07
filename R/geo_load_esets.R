@@ -54,7 +54,7 @@ geo_load_eset <- function(name,
   if (!is.null(targetlevelname)) {
     # split levels, if more than one is provided for each targetlevelname
     # and controllevelname (recognized by '|||')
-    if (grepl("(\\|){3}", targetlevelname)) {
+    if (grepl("(\\|){3}", targetlevelname)) { # nolint
       targetlevelname <- strsplit(
         targetlevelname, split = "|||", fixed = T
       )[[1]]
@@ -66,7 +66,7 @@ geo_load_eset <- function(name,
   }
 
   if (!is.null(controllevelname)) {
-    if (grepl("(\\|){3}", controllevelname)) {
+    if (grepl("(\\|){3}", controllevelname)) { # nolint
       controllevelname <- strsplit(
         controllevelname, split = "|||", fixed = T
       )[[1]]
