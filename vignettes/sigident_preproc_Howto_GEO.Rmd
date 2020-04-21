@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+The R package `sigident.preproc` provides preprocessing functionalities and is part of the `sigident` package framework: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident)
+
 In order to apply the R package `sigident` and its functions on GEO datasets, these datasets have first to be downloaded and preprocessed. The preprocessing includes the creation of a merged gene expression data set, extraction of sample metadata and batch correction. 
 The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/sigident).
 
