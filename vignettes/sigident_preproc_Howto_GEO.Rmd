@@ -169,7 +169,7 @@ knitr::include_graphics(paste0(plotdir, "Merged_after_batch_effect_boxplot.jpg")
 knitr::include_graphics(paste0(plotdir, "PCplot_after.png"))
 ```
 
-# List files in .Globalenv
+# List files in .Globalenv 
 
 All downloaded datasets and resulting objects, including `diagnosis`, `mergedset` and `mergeset` are assigned to the global environment and are suitable to be used in the subsequent analyses implemented in the R package `sigident`: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident).
 
