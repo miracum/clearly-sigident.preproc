@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In order to use the R package `sigident` and its functions with GEO datasets, these datasets have first to be downloaded and preprocessed. The preprocessing includes the creation of a merged gene expression data set, extraction of sample metadata and batch correction. 
+In order to apply the R package `sigident` and its functions on GEO datasets, these datasets have first to be downloaded and preprocessed. The preprocessing includes the creation of a merged gene expression data set, extraction of sample metadata and batch correction. 
 The R package `sigident` can be found [here](https://gitlab.miracum.org/clearly/sigident).
 
 # GEO platforms
@@ -50,9 +50,7 @@ dir.create(plotdir)
 idtype <- "affy"
 ```
 
-# Define list that contains a representation of the studies metadata
-
-Definition of a list that contains a representation of the studie's / studies' metadata
+# Definition of a list that contains a representation of the studie's / studies' metadata
 
 This example uses the GEO lung cancer studies "GSE18842", "GSE19804" and "GSE19188", which contain in total 367 samples (197 tumor; 170 non-tumor) and 54,675 transcripts obtained by using Affymetrix GeneChip Human Genome U133 Plus 2.0 Array (platform GPL570).  
 
@@ -98,7 +96,7 @@ eset <- GEOquery::getGEO(name, destdir = datadir)[[setid]]
 View(Biobase::pData(eset))
 ```
 
-Please be aware, that currently, this package works only with binary classification, meaning, the target variable (specified in `targetcolname`) may only contain two levels. There are scenarios, where your target contains more than two levels. In such cases, this package supports two possible approaches:  
+Please be aware that currently, this package works only with binary classification, meaning, the target variable (specified in `targetcolname`) may only contain two levels. There are scenarios, where your target contains more than two levels. In such cases, this package supports two possible approaches:  
 
 - 1: You can specify only those two levels of interest with `controllevelname` and `targetlevelname`. During the loading process, the GEO sets will be reduced to only contain cases with these levels of interest.  
 - 2: You can specify more than one level for `controllevelname` and `targetlevelname`, repspectively. During the loading process, the levels specified in those variables will be summarized to one level, either "Control" or "Target", in the merged data set. In order to achieve a such summarization of levels, please separate them by using three vertical lines (e.g. '|||', unicode character 'U+007C'). There MUST NOT be any addional character between the levels to be separated and the three vertical lines. The following code gives an example on how a splitting could look like for the GEO set 'GSE58095': 
@@ -127,13 +125,13 @@ studiesinfo <- list(
 )
 ```
 
-Caution: categroies not specified in either `targetlevelname` or `controllevelname` will be excluded from the merging!
+Caution: categories not specified in either `targetlevelname` or `controllevelname` will be excluded from the merging!
 
 # Load GEO datasets 
 
 The function `load_geo_data` downloads the GEO datasets specified in the list `studiesinfo`. Further preprocessing steps are performed, such as the discovering, visualizing and removing of batch effectsa and the merging of the data. 
 
-Batch effects are systematic non-biological variation between studies due to experimental and technical artifacts. As first visualization a boxplot is created with the included samples on the x-axis and the expression values on the y-axis. Thereby, considerable discrepancies between the three studies used in this example can already be recognized.    
+Batch effects are systematic non-biological variation between studies due to experimental and technical artifacts. As first visualization a boxplot is created with the included samples on the x-axis and the expression values on the y-axis. Thereby, considerable discrepancies between the three studies used in this example can already be recognized.  
 
 A more powerfull and also here included approach for batch effect detection is conducting a guided Principle Component Analysis (gPCA) implemented in the [gPCA](https://CRAN.R-project.org/package=gPCA) package.
 

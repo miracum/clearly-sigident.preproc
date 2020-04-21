@@ -16,8 +16,6 @@ The preprocessing includes the following steps:
   + batch effect detection and batch effect correction  
   + visualization of batch effects  
 
-All created objects will be 
-
 Currently supported input file formats are:
 
 - GEO data
@@ -52,7 +50,7 @@ dir.create(plotdir)
 idtype <- "affy"
 ```
 
-The, a list needs to be defined, that contains a representation of the studies metadata. In order to get the information needed to fill this list, the dataset has probably to be downloaded and the mapping information has to be extracted manually.
+Then a list needs to be defined, that contains a representation of the studies metadata. In order to get the information required to fill this list, the respective datasets have probably to be downloaded first to manually extract the mapping information.
 
 ```r
 studiesinfo <- list(
@@ -80,7 +78,7 @@ studiesinfo <- list(
 )
 ```
 
-Then, the function `load_geo_data` can be executed in order to load and preprocess the specified studies.
+After defining this metadata list, the function `load_geo_data` can be executed in order to load and preprocess the specified studies.
 
 ```r
 load_geo_data(studiesinfo = studiesinfo,
@@ -91,7 +89,7 @@ load_geo_data(studiesinfo = studiesinfo,
 
 All downloaded datasets and resulting objects are assigned to the global environment and are suitable to be used in the subsequent analyses implemented in the R package `sigident`.
 
-Please view the package's vignette to see a detailled description how to prepare datasets in order to be suitable for usage with the `sigident` package.
+Please view the [package's vignette](vignettes/) for a more detailled description on how to prepare datasets in order to be suitable for usage with the `sigident` package.
 
 Since the building the package vignette takes rather long (~ 20 min.), we provide the already built vignettes in [this repository](https://gitlab.miracum.org/clearly/sigident_vignettes). 
 
