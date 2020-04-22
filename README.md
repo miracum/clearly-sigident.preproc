@@ -93,7 +93,13 @@ Please view the [package's vignette](vignettes/) for a more detailled descriptio
 
 Since the building the package vignette takes rather long (~ 20 min.), we provide the already built vignettes in [this repository](https://gitlab.miracum.org/clearly/sigident_vignettes). 
 
-# Caution 
+# Notice 
 
 The *sigident.preproc* package is under active development and not on CRAN yet - this means, that from time to time, the API can break, due to extending and modifying its functionality. It can also happen, that previoulsy included functions and/or function arguments are no longer supported. 
 However, a detailed package vignette will be provided alongside with every major change in order to describe the currently supported workflow.
+
+# More Infos
+
+- about CLEARLY: [https://www.transcanfp7.eu/index.php/abstract/clearly.html](https://www.transcanfp7.eu/index.php/abstract/clearly.html)
+- about MIRACUM: [https://www.miracum.org/](https://www.miracum.org/)
+- about the Medical Informatics Initiative: [https://www.medizininformatik-initiative.de/index.php/de](https://www.medizininformatik-initiative.de/index.php/de)
