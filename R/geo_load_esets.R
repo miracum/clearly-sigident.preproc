@@ -59,8 +59,8 @@ geo_load_eset <- function(name,
         targetlevelname, split = "|||", fixed = T
       )[[1]]
     }
-    if (!any(targetlevelname %in% as.character(
-      unique(Biobase::pData(eset)[[targetcol]])
+    if (!any(targetlevelname %in% unique(
+      as.character(Biobase::pData(eset)[[targetcol]])
     ))) {
       stop(paste0("\nLevel(s) provided with targetlevelname are ",
                   "not present in your data.\n"))
@@ -73,8 +73,8 @@ geo_load_eset <- function(name,
         controllevelname, split = "|||", fixed = T
       )[[1]]
     }
-    if (!any(controllevelname %in% as.character(
-      unique(Biobase::pData(eset)[[targetcol]])
+    if (!any(controllevelname %in% unique(
+      as.character(Biobase::pData(eset)[[targetcol]])
     ))) {
       stop(paste0("\nLevel(s) provided with controllevelname are ",
                   "not present in your data.\n"))
