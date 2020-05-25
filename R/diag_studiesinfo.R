@@ -14,23 +14,28 @@
 diag_studiesinfo <- function(tab, type) {
 
   stopifnot(
-    ncol(tab) >= 7,
+    ncol(tab) >= 8,
     nrow(tab) >= 2,
     c("geo_id", "setid", "use_rawdata", "targetcolname", "targetlevelname",
-      "controllevelname", "diag_validation_study") %in% colnames(tab),
+      "controllevelname", "diagnostic_validation", "diagnostic_discovery") %in%
+      colnames(tab),
     sum(tab[, get("use_rawdata")] %in% c(0, 1)) == nrow(tab),
-    sum(tab[, get("diag_validation_study")] %in% c(-1, 0, 1, "")) ==
+    sum(tab[, get("diagnostic_validation")] %in% c(0, 1)) ==
+      nrow(tab),
+    sum(tab[, get("diagnostic_discovery")] %in% c(0, 1)) ==
       nrow(tab),
     type %in% c("discovery", "validation")
   )
 
   if (type == "discovery") {
-    tab <- tab[get("diag_validation_study") == 0, ]
+    tab <- tab[get("diagnostic_discovery") == 1, ]
   } else if (type == "validation") {
-    tab <- tab[get("diag_validation_study") == 1, ]
+    tab <- tab[get("diagnostic_validation") == 1, ]
   } else {
     stop("Wrong type")
   }
+
+  stopifnot(nrow(tab) > 0)
 
   # init outlist
   outlist <- list()
