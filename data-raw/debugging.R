@@ -87,3 +87,7 @@ diag_studiesinfo(tab, "validation")
 # prog
 prog_studiesinfo(tab, "discovery")
 prog_studiesinfo(tab, "validation")
+
+
+# prognostic classifier
+progclassifier_studyinfo(tab)

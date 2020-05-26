@@ -13,11 +13,11 @@
 prog_studiesinfo <- function(tab, type) {
 
   stopifnot(
-    ncol(tab) >= 15,
+    ncol(tab) >= 16,
     nrow(tab) >= 2,
     c("geo_id", "setid", "use_rawdata", "targetcolname", "targetlevelname",
       "controllevelname", "diagnostic_validation", "diagnostic_discovery",
-      "prognostic_validation", "prognostic_discovery",
+      "prognostic_validation", "prognostic_classifier", "prognostic_discovery",
       "timecolname", "statuscolname", "statuslevel_alive",
       "statuslevel_deceased", "status_na") %in% colnames(tab),
     sum(tab[, get("use_rawdata")] %in% c(0, 1)) == nrow(tab),
@@ -82,4 +82,34 @@ prog_studiesinfo <- function(tab, type) {
   }
 
   return(outlist)
+}
+
+
+#' @title progclassifier_studyinfo
+#'
+#' @description Helper function to import studiesinfos for the prognostic
+#'   classifier
+#'
+#' @details The function takes a table as input and converts it to a
+#'   prognostic classifier.
+#'
+#' @inheritParams diag_studiesinfo
+#'
+#' @export
+#'
+progclassifier_studyinfo <- function(tab) {
+  stopifnot(
+    ncol(tab) >= 16,
+    nrow(tab) >= 2,
+    c("geo_id", "setid", "use_rawdata", "targetcolname", "targetlevelname",
+      "controllevelname", "diagnostic_validation", "diagnostic_discovery",
+      "prognostic_validation", "prognostic_classifier", "prognostic_discovery",
+      "timecolname", "statuscolname", "statuslevel_alive",
+      "statuslevel_deceased", "status_na") %in% colnames(tab),
+    sum(tab[, get("prognostic_classifier")] %in% c(0, 1)) == nrow(tab)
+  )
+
+  ret <- tab[get("prognostic_classifier") == 1, get("geo_id")]
+
+  return(ret)
 }

@@ -1,8 +1,8 @@
-geo_id;setid;use_rawdata;targetcolname;targetlevelname;controllevelname;diagnostic_discovery;diagnostic_validation;prognostic_discovery;prognostic_validation;timecolname;statuscolname;statuslevel_alive;statuslevel_deceased;status_na
-GSE18842;1;0;source_name_ch1;Human Lung Tumor;Human Lung Control;1;0;0;0;;;;;
-GSE19804;1;0;source_name_ch1;frozen tissue of primary tumor;frozen tissue of adjacent normal;1;0;0;0;;;;;
-GSE19188;1;1;characteristics_ch1;tissue type: tumor;tissue type: healthy;1;0;1;0;characteristics_ch1.2;characteristics_ch1.3;status: alive;status: deceased;status: Not available
-GSE30219;1;0;source_name_ch1;Lung Tumour;Non Tumoral Lung;0;1;0;1;characteristics_ch1.9;characteristics_ch1.8;status: ALIVE;status: DEAD;status: NTL
-GSE33356;1;0;characteristics_ch1;tissue: lung cancer;tissue: paired normal adjacent;0;1;0;0;;;;;
-GSE102287;2;0;characteristics_ch1.6;tumor_normal status: T;tumor_normal status: N;0;1;0;0;;;;;
-GSE50081;1;0;characteristics_ch1.1;histology: adenocarcinoma|||histology: adenosquamous carcinoma|||histology: large cell carcinoma|||histology: NSClarge cell carcinoma-mixed|||histology: NSCLC-favor adenocarcinoma|||histology: squamous cell carcinoma|||histology: squamous cell carcinoma X2;NULL;0;0;0;1;characteristics_ch1.8;characteristics_ch1.9;status: alive;status: dead;NA
+geo_id;setid;use_rawdata;targetcolname;targetlevelname;controllevelname;diagnostic_discovery;diagnostic_validation;prognostic_discovery;prognostic_classifier;prognostic_validation;timecolname;statuscolname;statuslevel_alive;statuslevel_deceased;status_na
+GSE18842;1;0;source_name_ch1;Human Lung Tumor;Human Lung Control;1;0;0;1;0;;;;;
+GSE19804;1;0;source_name_ch1;frozen tissue of primary tumor;frozen tissue of adjacent normal;1;0;0;1;0;;;;;
+GSE19188;1;1;characteristics_ch1;tissue type: tumor;tissue type: healthy;1;0;1;0;0;characteristics_ch1.2;characteristics_ch1.3;status: alive;status: deceased;status: Not available
+GSE30219;1;0;source_name_ch1;Lung Tumour;Non Tumoral Lung;0;1;0;0;1;characteristics_ch1.9;characteristics_ch1.8;status: ALIVE;status: DEAD;status: NTL
+GSE33356;1;0;characteristics_ch1;tissue: lung cancer;tissue: paired normal adjacent;0;1;0;0;0;;;;;
+GSE102287;2;0;characteristics_ch1.6;tumor_normal status: T;tumor_normal status: N;0;1;0;0;0;;;;;
+GSE50081;1;0;characteristics_ch1.1;histology: adenocarcinoma|||histology: adenosquamous carcinoma|||histology: large cell carcinoma|||histology: NSClarge cell carcinoma-mixed|||histology: NSCLC-favor adenocarcinoma|||histology: squamous cell carcinoma|||histology: squamous cell carcinoma X2;NULL;0;0;0;0;1;characteristics_ch1.8;characteristics_ch1.9;status: alive;status: dead;NA
