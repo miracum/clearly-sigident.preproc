@@ -10,7 +10,8 @@ my_desc$set("Package", packagename)
 my_desc$set_authors(c(
     person("Lorenz A.", "Kapsner", email = "lorenz.kapsner@uk-erlangen.de", role = c('cre', 'aut'),
            comment = c(ORCID = "0000-0003-1866-860X")),
-  person("Johannes", "Vey", role = c('aut')),
+  person("Johannes", "Vey", role = c('aut'),
+         comment = c(ORCID = "0000-0002-2610-9667")),
   person("Meik", "Kunz", role = c('aut')),
   person("Andreas", "Pittroff", role = c('aut'))
 ))
@@ -19,7 +20,7 @@ my_desc$del("Maintainer")
 # Vignette Builder
 my_desc$set("VignetteBuilder" = "knitr")
 # Set the version
-my_desc$set_version("0.0.4.9003")
+my_desc$set_version("0.0.4.9004")
 # The title of your package
 my_desc$set(Title = "Sigident Preprocessing")
 # The description of your package
@@ -27,8 +28,8 @@ my_desc$set(Description = "Preprocessing datasets to be used with the sigident p
 # The description of your package
 my_desc$set("Date" = as.character(Sys.Date()))
 # The urls
-my_desc$set("URL", "https://gitlab.miracum.org/clearly/sigident.preproc")
-my_desc$set("BugReports", "https://gitlab.miracum.org/clearly/sigident.preproc/issues")
+my_desc$set("URL", "https://github.com/miracum/clearly-sigident.preproc")
+my_desc$set("BugReports", "https://github.com/miracum/clearly-sigident.preproc/issues")
 # License
 my_desc$set("License", "GPL-3")
 
