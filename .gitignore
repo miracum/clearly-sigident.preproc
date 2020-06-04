@@ -27,3 +27,6 @@ inst/doc
 !/ci/
 /.vscode
 !/.lintr
+!/tic.R
+!/.github/
+docs/
