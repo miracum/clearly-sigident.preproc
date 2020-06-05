@@ -4,11 +4,12 @@
 [![R CMD Check via {tic}](https://github.com/miracum/clearly-sigident.preproc/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/miracum/clearly-sigident.preproc/actions)
 [![linting](https://github.com/miracum/clearly-sigident.preproc/workflows/lint/badge.svg?branch=master)](https://github.com/miracum/clearly-sigident.preproc/actions)
 [![test-coverage](https://github.com/miracum/clearly-sigident.preproc/workflows/test-coverage/badge.svg?branch=master)](https://github.com/miracum/clearly-sigident.preproc/actions)
+[![codecov](https://codecov.io/gh/miracum/clearly-sigident.preproc/branch/master/graph/badge.svg)](https://codecov.io/gh/miracum/clearly-sigident.preproc)
 [![pipeline status](https://gitlab.miracum.org/clearly/sigident.preproc/badges/master/pipeline.svg)](https://gitlab.miracum.org/clearly/sigident.preproc/commits/master)
 [![coverage report](https://gitlab.miracum.org/clearly/sigident.preproc/badges/master/coverage.svg)](https://gitlab.miracum.org/clearly/sigident.preproc/commits/master)
 <!-- badges: end -->
 
-This is the repository of the R package `sigident.preproc`. It provides data preprocessing functionalities in order to preprare datasets for further usage with the `sigident` R package: [https://gitlab.miracum.org/clearly/sigident](https://gitlab.miracum.org/clearly/sigident)
+This is the repository of the R package `sigident.preproc`. It provides data preprocessing functionalities in order to preprare datasets for further usage with the `sigident` R package: [https://github.com/miracum/clearly-sigident](https://github.com/miracum/clearly-sigident)
 
 # Overview 
 
@@ -94,7 +95,7 @@ All downloaded datasets and resulting objects are assigned to the global environ
 
 Please view the [package's vignette](vignettes/) for a more detailled description on how to prepare datasets in order to be suitable for usage with the `sigident` package.
 
-Since the building the package vignette takes rather long (~ 20 min.), we provide the already built vignettes in [this repository](https://gitlab.miracum.org/clearly/sigident_vignettes). 
+Since the building the package vignette takes rather long (~ 20 min.), we provide the already built vignettes in [this repository](https://github.com/miracum/clearly-sigident_vignettes). 
 
 # Notice 
 
