@@ -87,11 +87,11 @@ jobs:
 
 
       - name: "[Stage] [Linux] Install Magick++"
-        if: runner.os = 'macOS'
+        if: runner.os == 'macOS'
         run: sudo apt install libmagick++-dev
 
       - name: "[Stage] [macOS] Install Magick++"
-        if: runner.os = 'macOS'
+        if: runner.os == 'macOS'
         run: brew install imagemagick@6
 
 
