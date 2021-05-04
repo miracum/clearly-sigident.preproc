@@ -83,6 +83,13 @@ usethis::use_package("qpdf", type = "Suggests")
 usethis::use_package("knitr", type = "Suggests")
 usethis::use_package("lintr", type = "Suggests")
 
+
+# https://cran.r-project.org/web/packages/devtools/vignettes/dependencies.html
+desc::desc_set_remotes(c(
+  "github::cran/gPCA"
+),
+file = usethis::proj_get())
+
 # buildignore
 usethis::use_build_ignore(".gitlab-ci.yml")
 usethis::use_build_ignore("data-raw")
