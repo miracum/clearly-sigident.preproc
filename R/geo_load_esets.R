@@ -43,7 +43,8 @@ geo_load_eset <- function(name,
   # original GEO data
   eset <- GEOquery::getGEO(
     name,
-    destdir = datadir
+    destdir = datadir,
+    AnnotGPL = TRUE
   )[[setid]]
 
   # rename targetcol
